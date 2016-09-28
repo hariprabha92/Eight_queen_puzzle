@@ -1,16 +1,15 @@
 var SIZE=8
 var checkPlacement = function(partial,col)
 {
-	var SIZE=8
+	//var SIZE=8
 	var row = partial.length;
 	if (partial)
 	{
 		var spread = 1;
 		
-		i=row-1;
+		var i=row-1;
 		//i=0
-		
-		for (;i>0;i-=1)
+		for (;i>=0;i-=1)
 		{
 			var prow=i;
 			var a = parseInt(partial[prow])
@@ -25,7 +24,7 @@ var checkPlacement = function(partial,col)
 }
 var printBoard=function(partial) 
 {
-	SIZE=8;
+//	SIZE=8;
 	for( var digit in partial )
 	{
 	var col = parseInt(partial[digit]);
@@ -35,15 +34,17 @@ var printBoard=function(partial)
 }
 var findSolutions=function() 
 {
-	var partials = new Array()    ;
-	partials.push('');
-	while ((partials.length) >= 1)
+	var partials=[''];
+	//var SIZE=8;
+	while (partials.length != 0)
 	{
 		var partial = partials.pop(0);
 		if (partial.length >= SIZE )
 		{
 			var solution = partial;
 			console.log( partial) ;
+	//		console.log('a')
+
 		}
 		else 
 		{
@@ -53,10 +54,16 @@ var findSolutions=function()
 			{
 				if (checkPlacement (partial, col))
 				{
-           				partials.push(partial+toString(col));
+           				partials.push(partial+col);
 				}
 			}
 		}
 	}
 }
-findSolutions()
+var start = new Date().getTime();
+findSolutions();
+var end = new Date().getTime();
+var t = end-start
+//t= t * Math.pow(10,-4,-2)
+console.log("Time taken :%dms",t);
+
